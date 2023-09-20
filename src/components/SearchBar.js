@@ -11,7 +11,7 @@ const SearchBar = ()=> {
   //use effect da se izbira random kuche na vseki page refresh
     const [dogs, setDogs] = useState(null)
     const [inputValue, setInput] = useState(null)
-    const [selectedDog, setSelectedDog] = useState(null)
+    const [selectedDogs, setSelectedDogs] = useState(null) //a usestate that holds a collection of the guessed dogs
     const [isOpen, setIsOpen] = useState(false)
     const [randomDog, setRandomDog] = useState(null)
     
@@ -37,13 +37,25 @@ const SearchBar = ()=> {
       } 
     }, [dogs]) 
 
+    useEffect(() => {
+      if (selectedDogs)
+      {
+        console.log(selectedDogs[selectedDogs.length - 1]); // Log the length of selectedDogs when it changes
+      }
+    }, [selectedDogs]);
+
 
     //console.log(dogs)
-    console.log(randomDog)
 
     const handleDogSelect = (dog) => {
-      setSelectedDog(dog)
+      // checks if the dog the user clicks has already been selected
+      if(selectedDogs === null || !selectedDogs.some((selectedDog) => selectedDog.breed == dog.breed))
+      {
+        setSelectedDogs([dog])
+        //console.log(selectedDogs.length)
+      }
       setIsOpen(false)
+
     }
 
     const handleFocus = (event) => {
@@ -97,7 +109,6 @@ const SearchBar = ()=> {
               </ul>
             </div>
           )}
-          {console.log(selectedDog)}
         </div>
       )
     }
