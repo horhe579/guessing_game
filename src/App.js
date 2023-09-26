@@ -10,6 +10,7 @@ import SearchBar from './components/SearchBar';
 function App() {
 
   const [selectedDogs, setSelectedDogs] = useState([]) //a usestate that holds a collection of the guessed dogs
+  const [randomDog, setRandomDog] = useState(null)
 
   const handleDogSelect = (dog) => {
     // checks if the dog the user clicks has already been selected
@@ -23,11 +24,21 @@ function App() {
 
   }
 
+  const setRandomSelectedDog = (dog) => {
+    setRandomDog(dog);
+  };  
+
   return (
     <div ClassName="App">
       <SearchBar
         selectedDogs={selectedDogs}
         onDogSelect={handleDogSelect}
+        randomDog={randomDog}
+        setRandomSelectedDog={setRandomSelectedDog}
+      />
+      <Play
+        selectedDogs={selectedDogs}
+        randomDog={randomDog}
       />
     </div>
   )

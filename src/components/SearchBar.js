@@ -6,15 +6,19 @@ import DogInfo from './DogInfo';
 
 
 //ne se pravi komponent s klas a s funkciq
-const SearchBar = ({selectedDogs, onDogSelect})=> {
+const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})=> {
 
   //use effect da se izbira random kuche na vseki page refresh
     const [dogs, setDogs] = useState(null)
     const [inputValue, setInput] = useState('')
     const [isOpen, setIsOpen] = useState(false)
-    const [randomDog, setRandomDog] = useState(null)
     const handleDogSelect = (dog) => {
       onDogSelect(dog); // Call the function passed from the parent to add the selected dog
+      // Other logic for handling the selection
+    };
+
+    const handleRandomDogSelect = (dog) => {
+      setRandomSelectedDog(dog); // Set the randomDog state
       // Other logic for handling the selection
     };
     
@@ -32,20 +36,19 @@ const SearchBar = ({selectedDogs, onDogSelect})=> {
       
     }, [])
 
+    
+
     useEffect(() => {
       if (dogs && dogs.length > 0) {
         const randomIndex = Math.floor(Math.random() * (dogs.length - 1));
         const selectedRandomDog = dogs[randomIndex];
-        setRandomDog(selectedRandomDog);
+        handleRandomDogSelect(selectedRandomDog);
+        if (randomDog) {
+          console.log("kur " + randomDog.breed)
+        }
       } 
     }, [dogs]) 
 
-    useEffect(() => {
-      if (selectedDogs)
-      {
-        console.log(selectedDogs[selectedDogs.length - 1]); // Log the length of selectedDogs when it changes
-      }
-    }, [selectedDogs]);
 
 
     //console.log(dogs)
@@ -59,7 +62,7 @@ const SearchBar = ({selectedDogs, onDogSelect})=> {
     const handleChange = (event) => {
       //debugger
       setInput(event.target.value)
-      console.log(event.target.value)
+      //console.log(event.target.value)
       //console.log(inputValue)
       //console.log(isOpen)
     }
@@ -88,7 +91,9 @@ const SearchBar = ({selectedDogs, onDogSelect})=> {
                   {
                     //dropdown menu
                     dogs
-                      ?.filter( (dog) => inputValue!=='' && dog.breed.toLowerCase().includes(inputValue?.toLowerCase()) && !selectedDogs.some((selectedDog) => selectedDog.breed === dog.breed))
+                      ?.filter( (dog) => inputValue!=='' &&
+                       dog.breed.toLowerCase().includes(inputValue?.toLowerCase()) &&
+                        !selectedDogs.some((selectedDog) => selectedDog.breed === dog.breed))
                       .map(dog =>
                         (
                             <li key={dog.breed} onClick={() => handleDogSelect(dog)} className='cursor-pointe hover:bg-gray-100 dark:hover:bg-gray-600'>

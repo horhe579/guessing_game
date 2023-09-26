@@ -4,17 +4,27 @@
 //import DogList from './components/DogList';
 import SearchBar from "./SearchBar";
 
-const Play = ()=> {
-
-    const parentHandleSearch = (event) => {
-      console.log(event.target.value)
-    }
-
-    return (
-    <div ClassName="Play">
-      <SearchBar handleSearch={parentHandleSearch} />
+const Play = ({ selectedDogs, randomDog }) => {
+  return (
+    <div>
+      <div>
+        {selectedDogs && randomDog && (
+          <div>
+            <b>Tries: {selectedDogs.length}</b>
+            <b> Random Dog: {randomDog.breed}</b>
+          </div>
+        )}
+      </div>
+      {selectedDogs && (
+        selectedDogs.slice().reverse().map((dog) => (
+          <div key={dog.index} style={{ color: dog.breed.toLowerCase() === (randomDog?.breed?.toLowerCase()) ? 'green' : 'red' }}>
+            <i>{dog.breed}</i>
+          </div>
+        ))
+      )}
     </div>
-  )
-}
+  );
+};
+
 
 export default Play;
