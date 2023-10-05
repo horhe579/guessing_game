@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 const Play = ({ selectedDogs, randomDog }) => {
   return (
     <div>
-      <div>
+      <div className="font-souls">
         {selectedDogs && randomDog && (
           <div>
             <b>Tries: {selectedDogs.length}</b>

@@ -51,9 +51,9 @@ function App() {
   }
 
   return (
-    <div ClassName="App">
+    <div className="App">
       {isCorrectGuess ? (
-        <button onClick={handleNewGame}>Start New Game</button>
+        <button onClick={handleNewGame}>New Game</button>
       ) : null}
       <SearchBar
         selectedDogs={selectedDogs}
@@ -61,14 +61,16 @@ function App() {
         randomDog={randomDog}
         setRandomSelectedDog={setRandomSelectedDog}
       />
+
       <Play
         selectedDogs={selectedDogs}
         randomDog={randomDog}
       />
+      
       <CongratsModal 
-      isOpen={isModalOpen} 
-      onClose={handleCloseModal}
-      handleNewGame={handleNewGame}
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal}
+        handleNewGame={handleNewGame}
       />
 
     </div>

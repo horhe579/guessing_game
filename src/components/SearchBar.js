@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import DogInfo from './DogInfo';
+import '../fonts/font.css';
 
 
 //ne se pravi komponent s klas a s funkciq
@@ -76,18 +77,19 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})
     
       return (
         //input field used for typing the dog breed
-        <div onBlur={handleBlur}>
+        <div className='relative flex flex-col items-center' onBlur={handleBlur}>
           <input
             placeholder='Enter a dog breed'
             type = 'text'
             value={inputValue || ''}
             onClick={handleFocus}
             onChange={handleChange}
+            className='font-souls border-[#1e243b] pt-2 border-4	px-4 mx-auto w-[28%] h-20 text-5xl rounded-full focus:outline-none'
           />
 
           {isOpen && inputValue!=='' && inputValue!==null &&(
-            <div id="dropdownDogs" class="z-10 bg-white rounded-lg shadow w-60 dark:bg-gray-700">
-              <ul className='py-2 overflow-y-auto text-grey-700'>
+            <div id="dropdownDogs" className='top-20 absolute rounded-lg shadow-2xl w-[23%] bg-[#cfc4c4]/90 max-h-96 overflow-y-auto'>
+              <ul className='py-2 overflow-hidden text-grey-700'>
                   {
                     //dropdown menu
                     dogs
@@ -96,7 +98,7 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})
                         !selectedDogs.some((selectedDog) => selectedDog.breed === dog.breed))
                       .map(dog =>
                         (
-                            <li key={dog.breed} onClick={() => handleDogSelect(dog)} className='cursor-pointe hover:bg-gray-100 dark:hover:bg-gray-600'>
+                            <li key={dog.breed} onClick={() => handleDogSelect(dog)} className='cursor-pointe hover:bg-[#c6aeae]/60'>
                               <DogInfo
                                 breed={dog.breed}
                                 origin={dog.origin} 
