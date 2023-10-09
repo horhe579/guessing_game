@@ -84,11 +84,11 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})
             value={inputValue || ''}
             onClick={handleFocus}
             onChange={handleChange}
-            className='font-souls border-[#1e243b] pt-2 border-4	px-4 mx-auto w-[28%] h-20 text-5xl rounded-full focus:outline-none'
+            className='bg-[#fff7f7] font-souls shadow-2xl border-[#1e243b] pt-2 border-4	px-4 mx-auto w-[28%] h-20 text-4xl rounded-full focus:outline-none'
           />
 
           {isOpen && inputValue!=='' && inputValue!==null &&(
-            <div id="dropdownDogs" className='top-20 absolute rounded-lg shadow-2xl w-[23%] bg-[#cfc4c4]/90 max-h-96 overflow-y-auto'>
+            <div id="dropdownDogs" className='top-20 absolute rounded-lg shadow-2xl w-[23%] bg-[#cfc4c4] max-h-96 overflow-y-auto'>
               <ul className='py-2 overflow-hidden text-grey-700'>
                   {
                     //dropdown menu
@@ -115,7 +115,3 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})
     }
 
     export default SearchBar
-  
-
-
-     

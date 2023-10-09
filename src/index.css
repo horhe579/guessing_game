@@ -20,3 +20,24 @@ img {
   width: 40px;
   height: 40px;
 }
+
+/* width */
+::-webkit-scrollbar { 
+  width: 10px; 
+} 
+
+/* Track */
+::-webkit-scrollbar-track { 
+  background: #f0ecec; 
+} 
+
+/* Handle */
+::-webkit-scrollbar-thumb { 
+  background: #d29c9cc1; 
+  border-radius: 5px; 
+} 
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover { 
+  background: #d29c9c; 
+}
