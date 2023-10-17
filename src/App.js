@@ -2,6 +2,7 @@
 import './App.css';
 //import PersonList from './components/PersonList.js';
 //import DogList from './components/DogList';
+import { isEqual } from 'lodash';
 import Play from './components/Play';
 import { useState } from 'react';
 import SearchBar from './components/SearchBar';
@@ -34,8 +35,7 @@ function App() {
   const handleGuess = (dog) => {
     if(selectedDogs)
     {
-      if(dog === randomDog)
-      {
+      if (isEqual(dog, randomDog)) {
         setIsCorrectGuess(true)
         setIsModalOpen(true)
       }
@@ -56,9 +56,6 @@ function App() {
         <img src={'https://scontent.xx.fbcdn.net/v/t1.15752-9/380320485_853442783067970_2388739403758307620_n.png?stp=dst-png_p403x403&_nc_cat=107&ccb=1-7&_nc_sid=aee45a&_nc_ohc=CPIR1HBct38AX-mY6Uq&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdTENHxdv6wXBz7sxU8YwVb6KIHnT98d-uEMNee0RcI-Cg&oe=654C005B'} 
         className=" w-1/6 h-1/6 overflow-hidden transform scale-[1.7] hover:scale-[2.0] transition duration-500" />
       </div>
-      {isCorrectGuess ? (
-        <button onClick={handleNewGame}>New Game</button>
-      ) : null}
       <SearchBar
         selectedDogs={selectedDogs}
         onDogSelect={handleDogSelect}
@@ -71,6 +68,10 @@ function App() {
         randomDog={randomDog}
       />
       
+      {isCorrectGuess ? (
+        <button onClick={handleNewGame}>New Game</button>
+      ) : null}
+
       <CongratsModal 
         isOpen={isModalOpen} 
         onClose={handleCloseModal}
