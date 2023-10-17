@@ -2,6 +2,8 @@
 //import './App.css';
 //import PersonList from './components/PersonList.js';
 //import DogList from './components/DogList';
+import Guess from "./Guess";
+import { Modal } from 'flowbite-react';
 import SearchBar from "./SearchBar";
 
 const Play = ({ selectedDogs, randomDog }) => {
@@ -18,7 +20,12 @@ const Play = ({ selectedDogs, randomDog }) => {
       {selectedDogs && (
         selectedDogs.slice().reverse().map((dog) => (
           <div key={dog.index} style={{ color: dog.breed.toLowerCase() === (randomDog?.breed?.toLowerCase()) ? 'green' : 'red' }}>
-            <i>{dog.breed}</i>
+            <Guess
+              breed={dog.breed}
+              origin={dog.origin} 
+              imageLink={dog.img}
+              randomDog={randomDog}          
+            />
           </div>
         ))
       )}

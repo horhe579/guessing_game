@@ -1,25 +1,36 @@
 import React from "react";
-import Modal from 'react-modal';
+import { Modal } from 'flowbite-react';
 
 const CongratsModal = ({ isOpen, onClose, handleNewGame }) => {
     return (
-        <Modal
-            isOpen={isOpen}
-            onRequestClose={onClose}
-            contentLabel="Congratulations Modal"
-        >
-            <div className="congratulationsModal">
-                <h2>Congratulations!</h2>
-                <p>You guessed the dog correctly!</p>
-                <button onClick={onClose}>
-                    Close
-                </button>
-                <button onClick={handleNewGame}>
-                    New Game
-                </button>
-            </div>
+        <Modal show={isOpen} size="md" popup onClose={onClose}>
+            <Modal.Header />
+            <Modal.Body>
+                <div className="text-center">
+                    <h2 className="text-2xl font-souls">Congratulations!</h2>
+                    <p className="text-xl font-souls mb-4">You guessed the dog correctly!</p>
+                    <div className="flex justify-center space-x-4">
+                        <button
+                            className="px-4 py-2 bg-[#1e243b] text-white rounded hover:bg-[#865f5f]"
+                            onClick={onClose}
+                        >
+                            Close
+                        </button>
+                        <button
+                            className="px-4 py-2 bg-[#1e243b] text-white rounded hover:bg-[#865f5f]"
+                            onClick={handleNewGame}
+                        >
+                            New Game
+                        </button>
+                    </div>
+                </div>
+            </Modal.Body>
         </Modal>
-    )
+    );
 }
+
+
+
+
 
 export default CongratsModal;

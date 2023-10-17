@@ -10,7 +10,7 @@ import '../fonts/font.css';
 const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})=> {
 
   //use effect da se izbira random kuche na vseki page refresh
-    const [dogs, setDogs] = useState(null)
+    const [dogs, setDogs] = useState([])
     const [inputValue, setInput] = useState('')
     const [isOpen, setIsOpen] = useState(false)
     const handleDogSelect = (dog) => {
@@ -40,15 +40,12 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})
     
 
     useEffect(() => {
-      if (dogs && dogs.length > 0) {
+      if (dogs.length && !randomDog) {
         const randomIndex = Math.floor(Math.random() * (dogs.length - 1));
         const selectedRandomDog = dogs[randomIndex];
         handleRandomDogSelect(selectedRandomDog);
-        if (randomDog) {
-          console.log("kur " + randomDog.breed)
-        }
       } 
-    }, [dogs]) 
+    }, [dogs, randomDog]) 
 
 
 
@@ -84,32 +81,39 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})
             value={inputValue || ''}
             onClick={handleFocus}
             onChange={handleChange}
-            className='bg-[#fff7f7] font-souls shadow-2xl border-[#1e243b] pt-2 border-4	px-4 mx-auto w-[28%] h-20 text-4xl rounded-full focus:outline-none'
+            className='bg-[#fff7f7] font-souls shadow-2xl border-[#1e243b] pt-2 border-4	px-4 mx-auto w-[28%] h-20 text-4xl rounded-full'
+            style={{ borderColor: '#1e243b', '--tw-ring-color':  '#1e243b', '--tw-ring-shadow': 'null'}}
           />
 
-          {isOpen && inputValue!=='' && inputValue!==null &&(
-            <div id="dropdownDogs" className='top-20 absolute rounded-lg shadow-2xl w-[23%] bg-[#cfc4c4] max-h-96 overflow-y-auto'>
-              <ul className='py-2 overflow-hidden text-grey-700'>
-                  {
-                    //dropdown menu
-                    dogs
-                      ?.filter( (dog) => inputValue!=='' &&
-                       dog.breed.toLowerCase().includes(inputValue?.toLowerCase()) &&
-                        !selectedDogs.some((selectedDog) => selectedDog.breed === dog.breed))
-                      .map(dog =>
-                        (
-                            <li key={dog.breed} onClick={() => handleDogSelect(dog)} className='cursor-pointe hover:bg-[#c6aeae]/60'>
-                              <DogInfo
-                                breed={dog.breed}
-                                origin={dog.origin} 
-                                imageLink={dog.img}
-                              /> 
-                            </li>
-                        ) )
+          {isOpen && inputValue !== '' && inputValue !== null && (
+            dogs.some((dog) => dog.breed.toLowerCase().includes(inputValue.toLowerCase())) && (
+              <div id="dropdownDogs" className='top-20 absolute rounded-lg shadow-2xl w-[23%] bg-[#cfc4c4] max-h-96 overflow-y-auto'>
+                <ul className='py-2 overflow-hidden text-grey-700'>
+                  {dogs
+                    .filter((dog) =>
+                      inputValue !== '' &&
+                      dog.breed.toLowerCase().includes(inputValue.toLowerCase()) &&
+                      !selectedDogs.some((selectedDog) => selectedDog.breed === dog.breed)
+                    )
+                    .map((dog) => (
+                      <li
+                        key={dog.breed}
+                        onClick={() => handleDogSelect(dog)}
+                        className='cursor-pointe hover:bg-[#c6aeae]/60'
+                      >
+                        <DogInfo
+                          breed={dog.breed}
+                          origin={dog.origin}
+                          imageLink={dog.img}
+                        />
+                      </li>
+                    ))
                   }
-              </ul>
-            </div>
+                </ul>
+              </div>
+            )
           )}
+
         </div>
       )
     }
