@@ -50,6 +50,15 @@ function App() {
     window.location.reload();
   }
 
+  //fix this
+  const guessColor = () => {
+    console.log("obicham gosho")
+    if(isEqual(selectedDogs.length, 0))
+    {
+      return '#c43b44'
+    }
+  }
+
   return (
     <div className="App bg-[#fff2f2] min-h-screen">
       <div className='logo flex justify-center'>
@@ -61,11 +70,13 @@ function App() {
         onDogSelect={handleDogSelect}
         randomDog={randomDog}
         setRandomSelectedDog={setRandomSelectedDog}
+        isCorrectGuess={isCorrectGuess}
       />
 
       <Play
         selectedDogs={selectedDogs}
         randomDog={randomDog}
+        guessColor={guessColor}
       />
       
       {isCorrectGuess ? (

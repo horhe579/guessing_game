@@ -7,7 +7,7 @@ import '../fonts/font.css';
 
 
 //ne se pravi komponent s klas a s funkciq
-const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})=> {
+const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog, isCorrectGuess})=> {
 
   //use effect da se izbira random kuche na vseki page refresh
     const [dogs, setDogs] = useState([])
@@ -81,12 +81,13 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})
             value={inputValue || ''}
             onClick={handleFocus}
             onChange={handleChange}
-            className='bg-[#fff7f7] font-souls shadow-2xl border-[#1e243b] pt-2 border-4	px-4 mx-auto w-[28%] h-20 text-4xl rounded-full'
-            style={{ borderColor: '#1e243b', '--tw-ring-color':  '#1e243b', '--tw-ring-shadow': 'null'}}
+            className='bg-[#fff7f7] font-souls shadow-2xl border-[#2a3352] pt-2 border-4	px-4 mx-auto w-[28%] h-20 text-4xl rounded-full'
+            style={{ borderColor: '#2a3352', '--tw-ring-color':  '#2a3352', '--tw-ring-shadow': 'null'}}
+            disabled={isCorrectGuess}
           />
 
           {isOpen && inputValue !== '' && inputValue !== null && (
-            (dogs.some((dog) => dog.breed.toLowerCase().includes(inputValue.toLowerCase())) || selectedDogs.some((selectedDog) => selectedDog.breed.toLowerCase().includes(inputValue.toLowerCase()))) && (
+            (dogs.some((dog) => dog.breed.toLowerCase().includes(inputValue.toLowerCase())) && !selectedDogs.some((selectedDog) => selectedDog.breed.toLowerCase().includes(inputValue.toLowerCase()))) && (
               <div id="dropdownDogs" className='top-20 absolute rounded-b-xl shadow-2xl w-[23%] bg-[#cfc4c4] max-h-96 overflow-y-auto'>
                 <ul className='py-2 overflow-hidden text-grey-700'>
                   {dogs
@@ -98,7 +99,8 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog})
                     .map((dog) => (
                       <li
                         key={dog.breed}
-                        onClick={() => handleDogSelect(dog)}
+                        onClick={() => {setInput('');
+                          handleDogSelect(dog)}}
                         className='cursor-pointe hover:bg-[#c6aeae]/60'
                       >
                         <DogInfo

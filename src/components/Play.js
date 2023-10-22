@@ -2,18 +2,18 @@
 //import './App.css';
 //import PersonList from './components/PersonList.js';
 //import DogList from './components/DogList';
+import { isEqual } from 'lodash';
 import Guess from "./Guess";
-import { Modal } from 'flowbite-react';
-import SearchBar from "./SearchBar";
 
-const Play = ({ selectedDogs, randomDog }) => {
+const Play = ({ selectedDogs, randomDog, guessColor }) => {
   return (
     <div>
-      <div className="font-souls">
+      <div className={`m-auto font-souls border-2 bg-[${guessColor}] border-[#2a3352] rounded-b-full w-[10%] text-xl`}>
         {selectedDogs && randomDog && (
           <div>
+            {console.log(isEqual(selectedDogs.length, 0))}
             <b>Tries: {selectedDogs.length}</b>
-            <b> Random Dog: {randomDog.breed}</b>
+            {/*<b> Random Dog: {randomDog.breed}</b>*/ }
           </div>
         )}
       </div>
