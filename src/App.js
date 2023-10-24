@@ -7,6 +7,7 @@ import Play from './components/Play';
 import { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import CongratsModal from './components/CongratsModal';
+import { triggerConfetti } from './confetti'
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
       if (isEqual(dog, randomDog)) {
         setIsCorrectGuess(true)
         setIsModalOpen(true)
+        triggerConfetti()
       }
     }
   }
@@ -51,13 +53,6 @@ function App() {
   }
 
   //fix this
-  const guessColor = () => {
-    console.log("obicham gosho")
-    if(isEqual(selectedDogs.length, 0))
-    {
-      return '#c43b44'
-    }
-  }
 
   return (
     <div className="App bg-[#fff2f2] min-h-screen">
@@ -76,12 +71,18 @@ function App() {
       <Play
         selectedDogs={selectedDogs}
         randomDog={randomDog}
-        guessColor={guessColor}
+        handleNewGame={handleNewGame}
+        isCorrectGuess={isCorrectGuess}
       />
       
-      {isCorrectGuess ? (
-        <button onClick={handleNewGame}>New Game</button>
-      ) : null}
+      {/*might make this new game button work in the future in a better way, sits ugly as of right now and has no real purpose because of the modal*/}
+      {/* {isCorrectGuess ? (
+        <button className='my-10 p-8 border-2 border-[#2a3352] text-2xl text-[#181d2e] font-bold font-souls w-1/8 h-1/3'
+        style={{ backgroundColor: '#45974D',  borderBottomLeftRadius: '50% 50%', borderBottomRightRadius: '50% 50%', borderTopLeftRadius: '10% 30%', borderTopRightRadius: '10% 30%' }}
+         onClick={handleNewGame}>
+          New Game
+          </button>
+      ) : null} */}
 
       <CongratsModal 
         isOpen={isModalOpen} 

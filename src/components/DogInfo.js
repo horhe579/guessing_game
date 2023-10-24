@@ -6,7 +6,7 @@ function DogInfo({ breed, origin, imageLink }) {
 
     return(
         <div className='p-3 flex items-center cursor-pointer'>
-            <div className="border-2 border-[#865f5f]/50 rounded-full overflow-hidden h-14 w-16">
+            <div className="border-2 border-[#2a3352]/80 rounded-full overflow-hidden h-14 w-16">
                 <img src={imageLink} alt={breed} className=" rounded-full object-cover w-full h-full hover:scale-125 transition duration-500" />
             </div>
 

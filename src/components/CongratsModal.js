@@ -11,13 +11,15 @@ const CongratsModal = ({ isOpen, onClose, handleNewGame }) => {
                     <p className="text-xl font-souls font-medium mb-4">You guessed the dog correctly!</p>
                     <div className="flex justify-center space-x-4">
                         <button
-                            className="px-4 py-2 bg-[#1e243b] text-white rounded hover:bg-[#865f5f]"
+                            className="px-4 py-2 bg-[#CE4257] text-white rounded-2xl hover:bg-[#DE5A6D] "
+                            style={{boxShadow: '0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3)'}}
                             onClick={onClose}
                         >
                             Close
                         </button>
                         <button
-                            className="px-4 py-2 bg-[#1e243b] text-white rounded hover:bg-[#865f5f]"
+                            className="px-4 py-2 bg-[#2a3352] text-white rounded-2xl hover:bg-[#3D476B]"
+                            style={{boxShadow: '0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3)'}}
                             onClick={handleNewGame}
                         >
                             New Game

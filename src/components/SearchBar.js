@@ -82,13 +82,15 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog, 
             onClick={handleFocus}
             onChange={handleChange}
             className='bg-[#fff7f7] font-souls shadow-2xl border-[#2a3352] pt-2 border-4	px-4 mx-auto w-[28%] h-20 text-4xl rounded-full'
-            style={{ borderColor: '#2a3352', '--tw-ring-color':  '#2a3352', '--tw-ring-shadow': 'null'}}
+            style={{ borderColor: '#2a3352', '--tw-ring-color':  '#2a3352', '--tw-ring-shadow': 'null',
+                     boxShadow: '0 8px 12px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3)',
+                    }}
             disabled={isCorrectGuess}
           />
 
           {isOpen && inputValue !== '' && inputValue !== null && (
-            (dogs.some((dog) => dog.breed.toLowerCase().includes(inputValue.toLowerCase())) && !selectedDogs.some((selectedDog) => selectedDog.breed.toLowerCase().includes(inputValue.toLowerCase()))) && (
-              <div id="dropdownDogs" className='top-20 absolute rounded-b-xl shadow-2xl w-[23%] bg-[#cfc4c4] max-h-96 overflow-y-auto'>
+            (dogs.some((dog) => dog.breed.toLowerCase().includes(inputValue.toLowerCase())) && !selectedDogs.some((selectedDog) => selectedDog.breed.toLowerCase() === inputValue.toLowerCase())) && (
+              <div id="dropdownDogs" className='z-10 top-20 absolute rounded-b-xl shadow-2xl w-[23%] bg-[#cfc4c4] max-h-96 overflow-y-auto'>
                 <ul className='py-2 overflow-hidden text-grey-700'>
                   {dogs
                     .filter((dog) =>
