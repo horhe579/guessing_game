@@ -90,7 +90,7 @@ const SearchBar = ({selectedDogs, onDogSelect, randomDog, setRandomSelectedDog, 
 
           {isOpen && inputValue !== '' && inputValue !== null && (
             (dogs.some((dog) => dog.breed.toLowerCase().includes(inputValue.toLowerCase())) && !selectedDogs.some((selectedDog) => selectedDog.breed.toLowerCase() === inputValue.toLowerCase())) && (
-              <div id="dropdownDogs" className='z-10 top-20 absolute rounded-b-xl shadow-2xl w-[23%] bg-[#cfc4c4] max-h-96 overflow-y-auto'>
+              <div id="dropdownDogs" className='z-20 top-20 absolute rounded-b-xl shadow-2xl w-[23%] bg-[#cfc4c4] max-h-96 overflow-y-auto'>
                 <ul className='py-2 overflow-hidden text-grey-700'>
                   {dogs
                     .filter((dog) =>

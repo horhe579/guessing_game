@@ -30,7 +30,7 @@ function Guess({ breed, origin, imageLink, randomDog }) {
   const originBackgroundColor = checkOriginMatch(origin, randomDog.origin);
 
   return (
-    <div className='relative p-3 flex mx-auto w-2/5'>
+    <div className='relative p-2.5 flex mx-auto w-2/5'>
       <div className={`absolute border-4 border-[#2a3352] rounded-full overflow-hidden h-20 w-20`}>
         <img
           src={imageLink}

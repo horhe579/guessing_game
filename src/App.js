@@ -8,9 +8,11 @@ import { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import CongratsModal from './components/CongratsModal';
 import { triggerConfetti } from './confetti'
+import './index.css'
 
 function App() {
 
+  const [showHint, setShowHint] = useState(false);
   const [selectedDogs, setSelectedDogs] = useState([]) //a usestate that holds a collection of the guessed dogs
   const [randomDog, setRandomDog] = useState(null)
   const [isCorrectGuess, setIsCorrectGuess] = useState(false)
@@ -24,6 +26,10 @@ function App() {
       //setSelectedDogs([dog])
       //console.log(selectedDogs.length)
       handleGuess(dog)
+    }
+
+    if(selectedDogs.length >= 7) {
+      setShowHint(true)
     }
     //setIsOpen(false)
 
@@ -41,6 +47,7 @@ function App() {
         setIsModalOpen(true)
         triggerConfetti()
       }
+
     }
   }
 
@@ -73,6 +80,7 @@ function App() {
         randomDog={randomDog}
         handleNewGame={handleNewGame}
         isCorrectGuess={isCorrectGuess}
+        showHint={showHint}
       />
       
       {/*might make this new game button work in the future in a better way, sits ugly as of right now and has no real purpose because of the modal*/}
